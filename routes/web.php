@@ -14,5 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('empleado.index');
 })->name('inicio');
+
+Route::get('/create', function () {
+    return view('empleado.create');
+})->name('crear');
+
+Route::get('/edit', function () {
+    return view('empleado.edit');
+})->name('editar');
+
+Route::get('/form', function () {
+    return view('empleado.form');
+})->name('formulario');
