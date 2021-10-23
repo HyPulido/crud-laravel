@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Empleado;
 use Illuminate\Http\Request;
 
+use function GuzzleHttp\Promise\all;
+
 class EmpleadoController extends Controller
 {
     /**
@@ -15,6 +17,7 @@ class EmpleadoController extends Controller
     public function index()
     {
         //
+        return view('empleados.index');
     }
 
     /**
@@ -25,6 +28,7 @@ class EmpleadoController extends Controller
     public function create()
     {
         //
+        return view('empleados.create');
     }
 
     /**
@@ -36,6 +40,13 @@ class EmpleadoController extends Controller
     public function store(Request $request)
     {
         //
+         $datosEmpleado=$request->except('_token');
+         if($request->hasFile('imagen')){
+$datosEmpleado['imagen']=$request->file('imagen')->store('uploads', 'public');
+        }
+
+        Empleado::insert($datosEmpleado);
+        return response()->json($datosEmpleado);
     }
 
     /**

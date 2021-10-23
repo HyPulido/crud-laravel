@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmpleadoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,18 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*
 Route::get('/', function () {
     return view('empleados.index');
-})->name('inicio');
-
+})->name('inicio');*/
+/*
 Route::get('/create', function () {
     return view('empleados.create');
 })->name('crear');
 
+Route::get('/empleados/create', [EmpleadoController::class, 'create']);
+*/
+Route::resource('empleados', EmpleadoController::class);
+/*
 Route::get('/edit', function () {
     return view('empleados.edit');
 })->name('editar');
 
 Route::get('/form', function () {
     return view('empleados.form');
-})->name('formulario');
+})->name('formulario');*/
