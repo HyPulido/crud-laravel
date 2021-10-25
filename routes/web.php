@@ -26,6 +26,7 @@ Route::get('/create', function () {
 Route::get('/empleados/create', [EmpleadoController::class, 'create']);
 */
 Route::resource('empleados', EmpleadoController::class);
+
 /*
 Route::get('/edit', function () {
     return view('empleados.edit');

@@ -3,18 +3,7 @@ Aqui se crean los empleados
 <form action="{{ url('/empleados') }}" enctype="multipart/form-data" method="post">
 @csrf
     <br><br>
-    <label for="nombre">Nombre:</label>
-    <input type="text" name="nombre" id="nombre"><br><br>
-    <label for="p-apellido" >Primer apellido: </label>
-    <input type="text" name="primer_apellido" id="p-apellido"><br><br>
-    <label for="s-apellido">Segundo apellido:</label>
-    <input type="text" name="segundo_apellido" id="s-apellido"><br><br>
-    <label for="correo">Correo electronico</label>
-    <input type="email" name="correo" id="correo"><br><br>
-    <label for="imagen">Imagen: </label>
-    <input type="file" name="imagen" id="imagen"><br><br>
-    <input type="submit" value="guardar"><br><br>
-
+@include('/empleados.form')
 </form>
 <!--
 <div class="container">
