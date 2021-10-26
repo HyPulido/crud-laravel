@@ -51,7 +51,8 @@ class EmpleadoController extends Controller
         }
 
         Empleado::insert($datosEmpleado);
-        return response()->json($datosEmpleado);
+        //return response()->json($datosEmpleado);
+        return redirect('/empleados')->with('mensaje', 'Empleado agregado con exito');
     }
 
     /**
