@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpleadoController;
+use Illuminate\Routing\RouteGroup;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +15,10 @@ use App\Http\Controllers\EmpleadoController;
 |
 */
 
-/*
+
 Route::get('/', function () {
-    return view('empleados.index');
-})->name('inicio');*/
+    return view('auth.login');
+});
 /*
 Route::get('/create', function () {
     return view('empleados.create');
@@ -25,7 +26,7 @@ Route::get('/create', function () {
 
 Route::get('/empleados/create', [EmpleadoController::class, 'create']);
 */
-Route::resource('empleados', EmpleadoController::class);
+Route::resource('empleados', EmpleadoController::class)->middleware('auth');
 
 /*
 Route::get('/edit', function () {
@@ -36,6 +37,12 @@ Route::get('/form', function () {
     return view('empleados.form');
 })->name('formulario');*/
 
-Auth::routes();
+Auth::routes(['register'=>false, 'reset'=>false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('/home', [EmpleadoController::class, 'index'])->name('home');
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/', [EmpleadoController::class, 'index'])->name('home');
+});

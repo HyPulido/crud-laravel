@@ -20,7 +20,7 @@ class EmpleadoController extends Controller
     public function index()
     {
         //
-        $datos['empleados']=Empleado::paginate(5);
+        $datos['empleados']=Empleado::paginate(10);
         return view('empleados.index', $datos);
     }
 
@@ -44,6 +44,29 @@ class EmpleadoController extends Controller
     public function store(Request $request)
     {
         //
+
+
+
+        $campos=[
+        'nombre'=>'required|string|max:100',
+        'primer_apellido'=>'required|string|max:100',
+        'segundo_apellido'=>'required|string|max:100',
+        'correo'=>'required|email|max:100',
+
+
+        ];
+
+        $mensaje=[
+        'required'=>'El :attribute es requerido',
+        ];
+
+        if($request->hasFile('imagen')){
+            $campos=['imagen'=>'required|max:10000|mimes:jpeg,png,jpg',];
+            $mensaje=['imagen.required'=>'La foto es requerida',];
+        }
+
+        $this->validate($request, $campos, $mensaje);
+
          $datosEmpleado=$request->except('_token');
          if($request->hasFile('imagen')){
 
