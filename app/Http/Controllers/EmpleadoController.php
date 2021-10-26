@@ -136,6 +136,6 @@ class EmpleadoController extends Controller
 
 
 
-        return redirect('empleados');
+        return redirect('empleados')->with('mensaje' ,'Empleado borrado');
     }
 }

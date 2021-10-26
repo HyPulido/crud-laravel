@@ -3,7 +3,7 @@
 
     {{method_field('PATCH')}}
 
-    @include('/empleados.form')
+    @include('/empleados.form', ['modo'=>'Editar'])
 
 
 </form>

@@ -1,9 +1,8 @@
-Aqui se crean los empleados
 
 <form action="{{ url('/empleados') }}" enctype="multipart/form-data" method="post">
 @csrf
-    <br><br>
-@include('/empleados.form')
+
+@include('/empleados.form', ['modo'=>'Crear'])
 </form>
 <!--
 <div class="container">

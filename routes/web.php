@@ -35,3 +35,7 @@ Route::get('/edit', function () {
 Route::get('/form', function () {
     return view('empleados.form');
 })->name('formulario');*/
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
