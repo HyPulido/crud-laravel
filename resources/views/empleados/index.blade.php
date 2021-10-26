@@ -1,4 +1,7 @@
 Esta es la lista de todos los empleados
+
+<a href="{{ url('empleados/create') }}">Registrar nuevo empleado</a>
+
 <table class="table table-light">
     <thead class="thead-light">
         <tr>
@@ -17,7 +20,7 @@ Esta es la lista de todos los empleados
 
             <tr>
                 <td>{{ $empleado->id }}</td>
-                <td>{{ $empleado->imagen }}</td>
+                <td><img src="{{ asset('storage').'/'.$empleado->imagen }}" alt="Imagen '.{{$empleado->imagen}}" width="100 "></td>
                 <td>{{ $empleado->nombre }}</td>
                 <td>{{ $empleado->primer_apellido }}</td>
                 <td>{{ $empleado->segundo_apellido }}</td>
@@ -27,7 +30,7 @@ Esta es la lista de todos los empleados
                     <form action="{{ url('/empleados/' . $empleado->id) }}" method="POST">
                         @csrf
                         {{method_field('DELETE')}}
-                        <input type="submit" onclick="return confirm('¿Quieres borrar?')">
+                        <input type="submit" value="Eliminar" onclick="return confirm('¿Quieres borrar?')">
 
                     </form>
 

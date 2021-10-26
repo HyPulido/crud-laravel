@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Empleado;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use function GuzzleHttp\Promise\all;
+
+
 
 class EmpleadoController extends Controller
 {
@@ -82,9 +85,31 @@ class EmpleadoController extends Controller
      * @param  \App\Models\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empleado $empleado)
+    public function update(Request $request, $id)
     {
         //
+
+        $datosEmpleado=$request->except('_token', '_method');
+
+//return $request;
+      if($request->hasFile('imagen')){
+          $empleado=Empleado::findOrFail($id);
+          Storage::delete('public/'.$empleado->imagen);
+            $datosEmpleado['imagen']=$request->file('imagen')->store('uploads', 'public');
+        }
+
+        Empleado::where('id', '=', $id)->update($datosEmpleado);
+        $empleado=Empleado::findOrFail($id);
+        return view('empleados.edit', compact('empleado'));
+
+/*
+        if($request->hasFile('imagen')){
+
+           $datosEmpleado['imagen']=$request->file('imagen')->store('uploads', 'public');
+       }
+
+       Empleado::insert($datosEmpleado);
+       return response()->json($datosEmpleado);*/
     }
 
     /**
@@ -96,8 +121,19 @@ class EmpleadoController extends Controller
     public function destroy($id)
     {
         //
-        Empleado::destroy($id);
+
+
+            $empleado=Empleado::findOrFail($id);
+           if( Storage::delete('public/'.$empleado->imagen)){
+                  Empleado::destroy($id);
+           }
+             // $datosEmpleado['imagen']=$request->file('imagen')->store('uploads', 'public');
+
+
+
        // Empleado::delete($empleado);
+
+
 
         return redirect('empleados');
     }
