@@ -37,7 +37,7 @@ Route::get('/form', function () {
     return view('empleados.form');
 })->name('formulario');*/
 
-Auth::routes(['register'=>false, 'reset'=>false]);
+Auth::routes(['register'=>false, 'reset'=>false ]);
 
 
 
